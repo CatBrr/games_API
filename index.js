@@ -3,9 +3,13 @@ const port = 8080 //Muutuja port väärtuseks paneme selle pordi numbri, millel 
 const swaggerUi = require('swagger-ui-express'); //laadib sisse swagger-ui-expressI raamistiku
 const swaggerDocument = require('./docs/swagger.json'); //defineerib swaggeri dokumentatsiooni asukoha ning laadib selle sisse
 
+app.get('/games', (req,res)=>{ //kutsud app objektist välja get() meetodi, andes esimeseks argumendiks "/games" ja teiseks argumendiks funktsiooni, mis käivitatakse, kui keegi teeb GET /games päringu meie API vastu. See funktsioon koostab vastuse sellele päringule. Selles funktsioonis on sul ligipääs kahele objektile: req(uest) ja res(ponse). Muutuja reqi seest saad lugeda andmeid, mis klient päringuga saatis. Selle lõpp-punkti jaoks meil sissetulevaid andmeid vaja pole. Muutuja res võimaldab panna vastusesse andmeid, mida me tahame kliendile tagasi saata.
+    res.send(["Witcher 3", "Cyberpunk 2077"]); //on funktsiooni keha, milles on välja kutsutud res objekti send() meetod, mis võimaldab vastuse kehasse (response body) panna andmeid. Me anname siin send()-ile argumendiks püsiprogrammeeritud (hard-coded) massiivi (array), mille sees on kaks mängu: Witcher 3 ja Cyberpunk 2077.
+});
+
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); //seadistatakse üles lõpp-punkt /docs, kus on lisatud swaggerUI
 
 //kutsume app muutujast välja meetodi listen() ja anname selle meetodi esimeseks argumendiks port muutujas oleva numbri, pannes sellega rakenduse kuulama võrgus seda porti sissetulevate päringute osas. 
 app.listen(port,()=> {
-    console.log(`API up at: http://localhost:${port}`)//Teine, valikuline argument listen meetodil määratleb funktsiooni, mis läheb siis käima, kui rakendus on hakanud võrgus porti kuulama. Selles funktsioonis prindime me konsoolile aadressi, millel rakendus kättesaadav on. Nii on mugav aadressi brauserisse kopeerida ja osades terminalides (nagu nt VS Code) on aadress ka klõpsatav.
+    console.log(`API up at: http://localhost:${port}`); //Teine, valikuline argument listen meetodil määratleb funktsiooni, mis läheb siis käima, kui rakendus on hakanud võrgus porti kuulama. Selles funktsioonis prindime me konsoolile aadressi, millel rakendus kättesaadav on. Nii on mugav aadressi brauserisse kopeerida ja osades terminalides (nagu nt VS Code) on aadress ka klõpsatav.
 });
