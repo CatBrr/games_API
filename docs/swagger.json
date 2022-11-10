@@ -34,10 +34,7 @@
                       },
                       "examples": {
                           "List of games": {
-                              "value": [
-                                  "Witcher 3",
-                                  "Cyberpunk 2077"
-                              ]
+                              "value": "[\n    {id:1,name:\"Witcher 3\",price:29.99},\n    {id:2,name:\"Cyberpunk 2077\",price:59.99},\n    {id:3,name:\"Minecraft\",price:26.99},\n    {id:4,name:\"Counter-Strike: Global Offensive\",price:0},\n    {id:5,name:\"Roblox\",price:0},\n    {id:6,name:\"Grant Theft Auto V\",price:29.99},\n    {id:7,name:\"Valorant\",price:0},\n    {id:8,name:\"Forza Horizon 5\",price:59.99}\n]"
                           }
                       }
                   }
