@@ -13,3 +13,4 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); //seadistat
 app.listen(port,()=> {
     console.log(`API up at: http://localhost:${port}`); //Teine, valikuline argument listen meetodil määratleb funktsiooni, mis läheb siis käima, kui rakendus on hakanud võrgus porti kuulama. Selles funktsioonis prindime me konsoolile aadressi, millel rakendus kättesaadav on. Nii on mugav aadressi brauserisse kopeerida ja osades terminalides (nagu nt VS Code) on aadress ka klõpsatav.
 });
+//returns all games for now
