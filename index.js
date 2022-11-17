@@ -40,7 +40,13 @@ app.post('/games',(req,res)=>{ //lisatakse mängude massiivi uus objekt
         .location(`${getBaseUrl(req)}/games/${games.length}`)
         .send(game);
 });
-
+app.delete('/games/:id',(req,res)=>{// lisame /games /:id lõpp-punkti. See :id on mingi number, mis näitab, millise mängu infot kustutakse (nt kui päring on GET /games/8, siis kustutatakse mäng, mille id väärtus on 8).
+    if(typeof games[req.params.id -1]==='undefined'){//kontrollitakse games massiivi sisu, vastavalt antud indeksile. Kui indeks ei ole massiivis, tagastatakse undefined
+       return res.status(404).send({error:"Games not found"});
+    }
+    games.splice(req.params.id-1,1);//kasutame funktsiooni splice, millega eemaldame elemendi massiivist. Esimeseks funktsiooni parameetriks anname alguse ehk 0 koha massiivist, kust hakatakse elemente eemaldama. Teiseks parameetriks anname arvu, mitu elementi eemaldatakse.
+    res.status(204).send({error:"No content"});// anname õige tagastatava staatuskoodi: 204 No Content
+});
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); //seadistatakse üles lõpp-punkt /docs, kus on lisatud swaggerUI
 
 //kutsume app muutujast välja meetodi listen() ja anname selle meetodi esimeseks argumendiks port muutujas oleva numbri, pannes sellega rakenduse kuulama võrgus seda porti sissetulevate päringute osas. 

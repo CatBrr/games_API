@@ -61,19 +61,14 @@ paths:
         post:
             requestBody:
                 content:
-                    name:
+                    new-game:
                         schema:
-                            type: string
+                            $ref: '#/components/schemas/new-game'
                         examples:
-                            name:
-                                value: '"name": Tetris'
-                    price:
-                        schema:
-                            format: float
-                            type: number
-                        examples:
-                            price:
-                                value: 'price:12.90'
+                            new-game:
+                                value:
+                                    name: Tetris
+                                    price: 0.99
                 required: true
             tags:
                 - new-game
@@ -81,6 +76,21 @@ paths:
                 '201':
                     $ref: '#/components/responses/new-game'
             description: add new game
+        delete:
+            tags:
+                - delete-game
+            responses:
+                '204':
+                    content:
+                        delete game:
+                            schema:
+                                $ref: '#/components/schemas/delete-game'
+                            examples:
+                                id:
+                                    value:
+                                        id: 1
+                    description: delete game
+            description: delete game
     '/games/{id}':
         summary: Get full details of a game
         description: Returns full details of a given id game
@@ -140,6 +150,17 @@ components:
             example:
                 name: Tetris
                 price: 0.99
+        delete-game:
+            description: delete game
+            required:
+                - id
+            type: object
+            properties:
+                id:
+                    description: ''
+                    type: string
+            example:
+                id: 1
     responses:
         List-of-games:
             content:
