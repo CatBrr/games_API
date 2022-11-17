@@ -58,6 +58,29 @@ paths:
                     $ref: '#/components/responses/List-of-games'
             summary: Get a list of all games
             description: Returns a list of all games in API
+        post:
+            requestBody:
+                content:
+                    name:
+                        schema:
+                            type: string
+                        examples:
+                            name:
+                                value: '"name": Tetris'
+                    price:
+                        schema:
+                            format: float
+                            type: number
+                        examples:
+                            price:
+                                value: 'price:12.90'
+                required: true
+            tags:
+                - new-game
+            responses:
+                '201':
+                    $ref: '#/components/responses/new-game'
+            description: add new game
     '/games/{id}':
         summary: Get full details of a game
         description: Returns full details of a given id game
@@ -100,6 +123,23 @@ components:
                     type: string
             example:
                 error: Error message.
+        new-game:
+            description: add new game
+            required:
+                - name
+                - price
+            type: object
+            properties:
+                name:
+                    description: ''
+                    type: string
+                price:
+                    format: float
+                    description: ''
+                    type: number
+            example:
+                name: Tetris
+                price: 0.99
     responses:
         List-of-games:
             content:
@@ -141,3 +181,13 @@ components:
                                     {id:8,name:"Forza Horizon 5",price:59.99}
                                 ]
             description: Get full datails of a game
+        new-game:
+            content:
+                name:
+                    schema:
+                        type: string
+                price:
+                    schema:
+                        format: float
+                        type: number
+            description: add a new game
