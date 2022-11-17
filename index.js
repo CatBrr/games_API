@@ -31,7 +31,7 @@ app.post('/games',(req,res)=>{ //lisatakse mängude massiivi uus objekt
         return res.status(400).send({ error: 'One or all params are missing'});
     }
     let game ={
-        id:games.lenght+1, //id väärtuseks on massiivi liikmete hetkearv + 1, 
+        id:games.length+1, //id väärtuseks on massiivi liikmete hetkearv + 1, 
         price: req.body.price,//üritati lugeda .price attribuuti selliselt objektilt, mis pole defineeritud. index.js real 35 on price: req.body.price. Sellest saame tuletada, et see objekt, mis pole defineeritud, on req.body. 
         name: req.body.name
     };
