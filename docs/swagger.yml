@@ -58,6 +58,39 @@ paths:
                     $ref: '#/components/responses/List-of-games'
             summary: Get a list of all games
             description: Returns a list of all games in API
+        post:
+            requestBody:
+                content:
+                    new-game:
+                        schema:
+                            $ref: '#/components/schemas/new-game'
+                        examples:
+                            new-game:
+                                value:
+                                    name: Tetris
+                                    price: 0.99
+                required: true
+            tags:
+                - new-game
+            responses:
+                '201':
+                    $ref: '#/components/responses/new-game'
+            description: add new game
+        delete:
+            tags:
+                - delete-game
+            responses:
+                '204':
+                    content:
+                        delete game:
+                            schema:
+                                $ref: '#/components/schemas/delete-game'
+                            examples:
+                                id:
+                                    value:
+                                        id: 1
+                    description: delete game
+            description: delete game
     '/games/{id}':
         summary: Get full details of a game
         description: Returns full details of a given id game
@@ -100,6 +133,34 @@ components:
                     type: string
             example:
                 error: Error message.
+        new-game:
+            description: add new game
+            required:
+                - name
+                - price
+            type: object
+            properties:
+                name:
+                    description: ''
+                    type: string
+                price:
+                    format: float
+                    description: ''
+                    type: number
+            example:
+                name: Tetris
+                price: 0.99
+        delete-game:
+            description: delete game
+            required:
+                - id
+            type: object
+            properties:
+                id:
+                    description: ''
+                    type: string
+            example:
+                id: 1
     responses:
         List-of-games:
             content:
@@ -141,3 +202,13 @@ components:
                                     {id:8,name:"Forza Horizon 5",price:59.99}
                                 ]
             description: Get full datails of a game
+        new-game:
+            content:
+                name:
+                    schema:
+                        type: string
+                price:
+                    schema:
+                        format: float
+                        type: number
+            description: add a new game
